@@ -7,17 +7,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Random;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText edtPhone;
     private Button generateOTPBtn;
+    String otp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 }else{
 
                     int randomPin   =(int) (Math.random()*9000)+1000;
-                    String otp  = String.valueOf(randomPin);
+                     otp  = String.valueOf(randomPin);
                    // postDataUsingVolley(edtPhone.getText().toString(), otp);
                     sendOTP(otp);
 
@@ -59,13 +59,13 @@ public class MainActivity extends AppCompatActivity {
             String apiKey = "apikey=" + "hkvjTUuwqXgMHsZ1";
             //Random random = new Random();
             //randonnumber=random.nextInt(99999);
-            String message = "&message=" + "Hey, Your OTP is " +otp;
-            String senderid = "&sender=" + "TXTLCL";
-            String numbers = "&numbers=" +edtPhone;
-            String format = "&format" +"json";
+            String message = "&message=" + "Your OTP-One Time Password is"+otp + "to authenticate your login with" +edtPhone+ "Powered By mTalkz";
+            String senderid = "&senderid=" + "MTAMOI";
+            String numbers = "&numbers="+edtPhone +","+ otp;
+            String format = "&format=" +"json";
             // Send data
-            HttpURLConnection conn = (HttpURLConnection) new URL("http://msg.mtalkz.com/V2/http-api-post.php?").openConnection();
-            String data = apiKey + numbers + message + senderid+format;
+            HttpURLConnection conn = (HttpURLConnection) new URL("http://msg.mtalkz.com/V2/http-api-post.php").openConnection();
+            String data = apiKey + senderid + numbers + message + format;
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
@@ -81,4 +81,5 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Error SMS "+e);
         }
     }
+
 }
