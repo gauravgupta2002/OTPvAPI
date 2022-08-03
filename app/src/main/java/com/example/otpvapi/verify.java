@@ -44,7 +44,7 @@ public class verify extends AppCompatActivity {
     public void verifyOTP(String randomnumber) {
         //Toast.makeText(verify.this,"Verify Button",Toast.LENGTH_LONG).show();
         otp_text = edtOTP.getText().toString().trim();
-        if(edtOTP.equals(String.valueOf(randomnumber)))
+        if(otp_text.equals(String.valueOf(randomnumber)))
         {
             Toast.makeText(verify.this,"user login in successfully",Toast.LENGTH_LONG).show();
             finish();
